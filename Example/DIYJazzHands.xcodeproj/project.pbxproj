@@ -1,0 +1,285 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DEAC882B159A6A78007D8824 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAC882A159A6A78007D8824 /* UIKit.framework */; };
+		DEAC882D159A6A78007D8824 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAC882C159A6A78007D8824 /* Foundation.framework */; };
+		DEAC882F159A6A78007D8824 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAC882E159A6A78007D8824 /* CoreGraphics.framework */; };
+		DEAC8835159A6A78007D8824 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DEAC8833159A6A78007D8824 /* InfoPlist.strings */; };
+		DEAC8837159A6A78007D8824 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DEAC8836159A6A78007D8824 /* main.m */; };
+		DEAC883B159A6A78007D8824 /* DIYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DEAC883A159A6A78007D8824 /* DIYAppDelegate.m */; };
+		DEAC884C159A6B22007D8824 /* DIYJazzHands.m in Sources */ = {isa = PBXBuildFile; fileRef = DEAC884B159A6B22007D8824 /* DIYJazzHands.m */; };
+		DEAC8850159A6D76007D8824 /* DIYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEAC884E159A6D76007D8824 /* DIYViewController.m */; };
+		DEAC8851159A6D76007D8824 /* DIYViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEAC884F159A6D76007D8824 /* DIYViewController.xib */; };
+		DEAC8853159A6FE5007D8824 /* scratchOff.png in Resources */ = {isa = PBXBuildFile; fileRef = DEAC8852159A6FE5007D8824 /* scratchOff.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DEAC8826159A6A78007D8824 /* DIYJazzHands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DIYJazzHands.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEAC882A159A6A78007D8824 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DEAC882C159A6A78007D8824 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DEAC882E159A6A78007D8824 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DEAC8832159A6A78007D8824 /* DIYJazzHands-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DIYJazzHands-Info.plist"; sourceTree = "<group>"; };
+		DEAC8834159A6A78007D8824 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DEAC8836159A6A78007D8824 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DEAC8838159A6A78007D8824 /* DIYJazzHands-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DIYJazzHands-Prefix.pch"; sourceTree = "<group>"; };
+		DEAC8839159A6A78007D8824 /* DIYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DIYAppDelegate.h; sourceTree = "<group>"; };
+		DEAC883A159A6A78007D8824 /* DIYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DIYAppDelegate.m; sourceTree = "<group>"; };
+		DEAC884A159A6B22007D8824 /* DIYJazzHands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIYJazzHands.h; path = ../DIYJazzHands.h; sourceTree = "<group>"; };
+		DEAC884B159A6B22007D8824 /* DIYJazzHands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIYJazzHands.m; path = ../DIYJazzHands.m; sourceTree = "<group>"; };
+		DEAC884D159A6D76007D8824 /* DIYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIYViewController.h; sourceTree = SOURCE_ROOT; };
+		DEAC884E159A6D76007D8824 /* DIYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIYViewController.m; sourceTree = SOURCE_ROOT; };
+		DEAC884F159A6D76007D8824 /* DIYViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DIYViewController.xib; sourceTree = SOURCE_ROOT; };
+		DEAC8852159A6FE5007D8824 /* scratchOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratchOff.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DEAC8823159A6A78007D8824 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEAC882B159A6A78007D8824 /* UIKit.framework in Frameworks */,
+				DEAC882D159A6A78007D8824 /* Foundation.framework in Frameworks */,
+				DEAC882F159A6A78007D8824 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DEAC881B159A6A77007D8824 = {
+			isa = PBXGroup;
+			children = (
+				DEAC884A159A6B22007D8824 /* DIYJazzHands.h */,
+				DEAC884B159A6B22007D8824 /* DIYJazzHands.m */,
+				DEAC8830159A6A78007D8824 /* Example */,
+				DEAC8829159A6A78007D8824 /* Frameworks */,
+				DEAC8827159A6A78007D8824 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DEAC8827159A6A78007D8824 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DEAC8826159A6A78007D8824 /* DIYJazzHands.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DEAC8829159A6A78007D8824 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DEAC882A159A6A78007D8824 /* UIKit.framework */,
+				DEAC882C159A6A78007D8824 /* Foundation.framework */,
+				DEAC882E159A6A78007D8824 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DEAC8830159A6A78007D8824 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				DEAC8839159A6A78007D8824 /* DIYAppDelegate.h */,
+				DEAC883A159A6A78007D8824 /* DIYAppDelegate.m */,
+				DEAC884D159A6D76007D8824 /* DIYViewController.h */,
+				DEAC884E159A6D76007D8824 /* DIYViewController.m */,
+				DEAC884F159A6D76007D8824 /* DIYViewController.xib */,
+				DEAC8831159A6A78007D8824 /* Supporting Files */,
+			);
+			name = Example;
+			path = DIYJazzHands;
+			sourceTree = "<group>";
+		};
+		DEAC8831159A6A78007D8824 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DEAC8852159A6FE5007D8824 /* scratchOff.png */,
+				DEAC8832159A6A78007D8824 /* DIYJazzHands-Info.plist */,
+				DEAC8833159A6A78007D8824 /* InfoPlist.strings */,
+				DEAC8836159A6A78007D8824 /* main.m */,
+				DEAC8838159A6A78007D8824 /* DIYJazzHands-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DEAC8825159A6A78007D8824 /* DIYJazzHands */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEAC883E159A6A78007D8824 /* Build configuration list for PBXNativeTarget "DIYJazzHands" */;
+			buildPhases = (
+				DEAC8822159A6A78007D8824 /* Sources */,
+				DEAC8823159A6A78007D8824 /* Frameworks */,
+				DEAC8824159A6A78007D8824 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DIYJazzHands;
+			productName = DIYJazzHands;
+			productReference = DEAC8826159A6A78007D8824 /* DIYJazzHands.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DEAC881D159A6A77007D8824 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DIY;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "DIY, Co.";
+			};
+			buildConfigurationList = DEAC8820159A6A77007D8824 /* Build configuration list for PBXProject "DIYJazzHands" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DEAC881B159A6A77007D8824;
+			productRefGroup = DEAC8827159A6A78007D8824 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DEAC8825159A6A78007D8824 /* DIYJazzHands */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DEAC8824159A6A78007D8824 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEAC8835159A6A78007D8824 /* InfoPlist.strings in Resources */,
+				DEAC8851159A6D76007D8824 /* DIYViewController.xib in Resources */,
+				DEAC8853159A6FE5007D8824 /* scratchOff.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DEAC8822159A6A78007D8824 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEAC8837159A6A78007D8824 /* main.m in Sources */,
+				DEAC883B159A6A78007D8824 /* DIYAppDelegate.m in Sources */,
+				DEAC884C159A6B22007D8824 /* DIYJazzHands.m in Sources */,
+				DEAC8850159A6D76007D8824 /* DIYViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DEAC8833159A6A78007D8824 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEAC8834159A6A78007D8824 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DEAC883C159A6A78007D8824 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DEAC883D159A6A78007D8824 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DEAC883F159A6A78007D8824 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DIYJazzHands/DIYJazzHands-Prefix.pch";
+				INFOPLIST_FILE = "DIYJazzHands/DIYJazzHands-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DEAC8840159A6A78007D8824 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DIYJazzHands/DIYJazzHands-Prefix.pch";
+				INFOPLIST_FILE = "DIYJazzHands/DIYJazzHands-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DEAC8820159A6A77007D8824 /* Build configuration list for PBXProject "DIYJazzHands" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEAC883C159A6A78007D8824 /* Debug */,
+				DEAC883D159A6A78007D8824 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEAC883E159A6A78007D8824 /* Build configuration list for PBXNativeTarget "DIYJazzHands" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEAC883F159A6A78007D8824 /* Debug */,
+				DEAC8840159A6A78007D8824 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DEAC881D159A6A77007D8824 /* Project object */;
+}
