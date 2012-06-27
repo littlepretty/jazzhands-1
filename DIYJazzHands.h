@@ -13,24 +13,41 @@
 
 //
 
-#define MAXLINES 5
-#define MAXTARGETS 10
-#define TARGETRADIUS 30
+#define TARGETRADIUS 20
 
 //
 
+/*
 typedef struct {
-    CGPoint center;
-    int radius;
+    CGRect targetRect;
     BOOL triggered;
 } FingerTarget;
+*/
 
+/*
 typedef struct {
     CGPoint p1;
     CGPoint p2;
     FingerTarget targets[MAXTARGETS];
     int targetCount;
 } JazzLine;
+*/
+
+@interface JazzTarget : NSObject
+
+@property (nonatomic, assign) CGRect targetRect;
+@property (nonatomic, assign) BOOL triggered;
+
+@end
+
+@interface JazzLine : NSObject
+
+@property (nonatomic, assign) CGPoint p1;
+@property (nonatomic, assign) CGPoint p2;
+@property (nonatomic, retain) NSMutableArray *targets;
+
+@end
+
 
 //
 
@@ -44,11 +61,10 @@ typedef struct {
     CGPoint	location;
 	CGPoint	previousLocation;
     
-    JazzLine lines[MAXLINES];
-    int lineCount;
     int targetCount;
+    int targetsTouched;
     
-//    CGPoint lastPoint;
+    BOOL isTriggered;
 }
 
 //
@@ -70,6 +86,7 @@ typedef struct {
 
 @property (nonatomic, retain) id target;
 @property (nonatomic, assign) SEL action;
+@property (nonatomic, retain) NSMutableArray *lines;
 
 //
 // Init

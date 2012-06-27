@@ -8,6 +8,67 @@
 
 #import "DIYJazzHands.h"
 
+#pragma mark - JazzTarget
+@implementation JazzTarget
+
+@synthesize targetRect = _targetRect;
+@synthesize triggered = _triggered;
+
+@end
+
+#pragma mark - JazzLine
+@implementation JazzLine
+
+@synthesize p1 = _p1;
+@synthesize p2 = _p2;
+@synthesize targets = _targets;
+
+- (id)init
+{
+    if (self = [super init]) {
+        _targets = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
+}
+
+- (void)addLineFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint withTargetSize:(int)targetSize
+{
+    self.p1 = startPoint;
+    self.p2 = endPoint;
+    
+    //
+    // Make targets along line
+    //
+    
+    // Precalculate distances
+    int xDist = endPoint.x - startPoint.x;
+    int yDist = endPoint.y - startPoint.y;
+    float distance = sqrtf(pow(xDist, 2) + pow(yDist, 2));
+    
+    // Precalculate # targets and deltas
+    int numTargets = distance / (float) targetSize;
+    int dX = xDist / (float)numTargets;
+    int dY = yDist / (float)numTargets;
+    
+    for (int i = 0; i < numTargets; i++) {
+        JazzTarget *newTarget = [[JazzTarget alloc] init];
+        newTarget.targetRect = CGRectMake(startPoint.x + i*dX, startPoint.y + i*dY, targetSize, targetSize);
+        newTarget.triggered = NO;
+        [self.targets addObject:newTarget];
+    }
+}
+
+- (void)dealloc
+{
+    [_targets release]; self.targets = nil;
+    [super dealloc];
+}
+
+@end
+
+#pragma mark - DIYJazzHands
+
 @implementation DIYJazzHands
 
 @synthesize target = _target;
@@ -17,8 +78,10 @@
 @synthesize touchColor = _touchColor;
 @synthesize mask = _mask;
 
-@synthesize touchSize= _touchSize;
+@synthesize touchSize = _touchSize;
 @synthesize targetSize = _targetSize;
+
+@synthesize lines = _lines;
 
 
 #pragma mark - Init
@@ -38,8 +101,11 @@
     if (self) {
         _target = aTarget;
         _action = anAction;
-        lineCount = 0;
         targetCount = 0;
+        targetsTouched = 0;
+        isTriggered = NO;
+        _targetSize = TARGETRADIUS;
+        _lines = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -90,13 +156,8 @@
     CGPoint newPoint = [touch locationInView:self];
     
     // Check whether touch is on a target
+    [self isTouchInTargets:touch];
     
-    for (int i = 0; i < lineCount; i++) {
-        for (int j = 0; j < lines[i].targetCount; j++) {
-            
-        }
-    }
-
     // Draw new touches
     [self drawToCacheFromPoint:lastPoint toPoint:newPoint];
     [self setNeedsDisplay];
@@ -110,9 +171,11 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
+    
+    [self checkFinished];
 }
 
-#pragma mark - Fix dirtyrect stuff
+#pragma mark - Drawing
 - (void) drawToCacheFromPoint:(CGPoint)lastPoint toPoint:(CGPoint)newPoint {
 	CGContextMoveToPoint(alphaPixels, lastPoint.x, lastPoint.y);
 	CGContextAddLineToPoint(alphaPixels, newPoint.x, newPoint.y);
@@ -132,21 +195,17 @@
 
 - (void)addLineAtPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
 {
-    if (lineCount < MAXLINES) {
-        JazzLine newLine;
-        newLine.p1 = startPoint;
-        newLine.p2 = endPoint;
-        lines[lineCount] = newLine;
-        lineCount++;
-        
-        // make targets along line
-    }
+    JazzLine *newLine = [[JazzLine alloc] init];
+    [newLine addLineFromPoint:startPoint toPoint:endPoint withTargetSize:self.targetSize];
+    [self.lines addObject:newLine];
+    
+    targetCount += [newLine.targets count];
 }
 
 - (void)makeCheckWithFrame:(CGRect)frame
 {
-    [self addLineAtPoint:CGPointMake(108, 217) toPoint:CGPointMake(213, 319)];
-    [self addLineAtPoint:CGPointMake(213, 319) toPoint:CGPointMake(402, 86)];
+//    [self addLineAtPoint:CGPointMake(108, 217) toPoint:CGPointMake(213, 319)];
+//    [self addLineAtPoint:CGPointMake(213, 319) toPoint:CGPointMake(402, 86)];
 }
 
 - (void)makeXWithFrame:(CGRect)frame
@@ -163,27 +222,50 @@
     targetCount = 0;
     
     // clear lines?
-    lineCount = 0;
 }
 
 #pragma mark - Utility methods
 
-- (BOOL)isComplete
-{
-    return NO;
-}
-
 - (BOOL)isTouchInTargets:(UITouch *)touch
 {
+    for (JazzLine *line in self.lines) {
+        for (JazzTarget *target in line.targets) {
+            if (!target.triggered && CGRectContainsPoint(target.targetRect, [touch locationInView:self])) {
+                target.triggered = YES;
+                targetsTouched++;
+            }
+        }
+    }
+    
     return YES;
+}
+
+- (void)checkFinished
+{    
+//    NSLog(@"targetCount: %d", targetCount);
+//    NSLog(@"targetsTouched: %d", targetsTouched);
+    
+    if (targetsTouched > 0.8 * targetCount && !isTriggered) {
+        isTriggered = YES;
+        [self.target performSelector:self.action];
+    }
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
+    // CG stuff
     CGContextFlush(alphaPixels);
     CGContextRelease(alphaPixels);
+    
+    // Other
+    
+    [_lines release]; self.lines = nil;
+    [_bgColor release]; self.bgColor = nil;
+    [_touchColor release]; self.touchColor = nil;
+    [_mask release]; self.mask = nil;
+    
     [super dealloc];
 }
 

@@ -46,8 +46,11 @@
     self.scratchOff = [[DIYJazzHands alloc] initWithFrame:self.scratchedOff.frame withTarget:self withAction:@selector(didScratchOff)];
 //    self.scratchOff.bgColor = [UIColor grayColor];
 //    self.scratchOff.touchColor = [UIColor clearColor];
-    self.scratchOff.touchSize = 10;
+    self.scratchOff.touchSize = 20;
     [self.scratchOff initContext];
+    
+    // Add target lines to scratchOff
+    [self.scratchOff addLineAtPoint:CGPointMake(0, 0.5 * self.scratchOff.frame.size.height) toPoint:CGPointMake(self.scratchOff.frame.size.width, 0.5 * self.scratchOff.frame.size.height)];
     
     [self.view addSubview:self.scratchedOff];
     [self.view addSubview:self.scratchOff];
@@ -64,6 +67,10 @@
 - (void)didScratchOff
 {
     NSLog(@"Scratch");
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        self.scratchOff.alpha = 0.0f;
+    }];
 }
 
 
