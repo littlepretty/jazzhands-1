@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		DE1AAB84159AF728007E7C58 /* gra_scratchable.png in Resources */ = {isa = PBXBuildFile; fileRef = DE1AAB83159AF728007E7C58 /* gra_scratchable.png */; };
+		DE9C3801159B8B77002B46FA /* gra_scratch_off_field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE9C37FF159B8B77002B46FA /* gra_scratch_off_field@2x.png */; };
+		DE9C3802159B8B77002B46FA /* gra_scratched_off_field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE9C3800159B8B77002B46FA /* gra_scratched_off_field@2x.png */; };
 		DEAC882B159A6A78007D8824 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAC882A159A6A78007D8824 /* UIKit.framework */; };
 		DEAC882D159A6A78007D8824 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAC882C159A6A78007D8824 /* Foundation.framework */; };
 		DEAC882F159A6A78007D8824 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAC882E159A6A78007D8824 /* CoreGraphics.framework */; };
@@ -22,6 +24,8 @@
 
 /* Begin PBXFileReference section */
 		DE1AAB83159AF728007E7C58 /* gra_scratchable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gra_scratchable.png; sourceTree = "<group>"; };
+		DE9C37FF159B8B77002B46FA /* gra_scratch_off_field@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gra_scratch_off_field@2x.png"; sourceTree = "<group>"; };
+		DE9C3800159B8B77002B46FA /* gra_scratched_off_field@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gra_scratched_off_field@2x.png"; sourceTree = "<group>"; };
 		DEAC8826159A6A78007D8824 /* DIYJazzHands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DIYJazzHands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEAC882A159A6A78007D8824 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DEAC882C159A6A78007D8824 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -100,6 +104,8 @@
 		DEAC8831159A6A78007D8824 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DE9C37FF159B8B77002B46FA /* gra_scratch_off_field@2x.png */,
+				DE9C3800159B8B77002B46FA /* gra_scratched_off_field@2x.png */,
 				DE1AAB83159AF728007E7C58 /* gra_scratchable.png */,
 				DEAC8852159A6FE5007D8824 /* scratchOff.png */,
 				DEAC8832159A6A78007D8824 /* DIYJazzHands-Info.plist */,
@@ -166,6 +172,8 @@
 				DEAC8851159A6D76007D8824 /* DIYViewController.xib in Resources */,
 				DEAC8853159A6FE5007D8824 /* scratchOff.png in Resources */,
 				DE1AAB84159AF728007E7C58 /* gra_scratchable.png in Resources */,
+				DE9C3801159B8B77002B46FA /* gra_scratch_off_field@2x.png in Resources */,
+				DE9C3802159B8B77002B46FA /* gra_scratched_off_field@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

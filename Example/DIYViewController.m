@@ -14,7 +14,8 @@
 
 @implementation DIYViewController
 
-@synthesize scratchoff = _scratchoff;
+@synthesize scratchOff = _scratchOff;
+@synthesize scratchedOff = _scratchedOff;
 
 #pragma mark - Init
 
@@ -36,14 +37,20 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    self.scratchoff = [[DIYJazzHands alloc] initWithFrame:CGRectMake(196, 244, 200, 44) withTarget:self withAction:@selector(didScratchOff)];
-    self.scratchoff.bgColor = [UIColor grayColor];
-    self.scratchoff.touchColor = [UIColor clearColor];
-    self.scratchoff.touchSize = 10;
-    [self.scratchoff initContext];
+    [super viewDidLoad];    
+    // Add background image for scratchoff
+    self.scratchedOff = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"gra_scratched_off_field@2x.png"]];
+    self.scratchedOff.frame = CGRectMake(196, 244, 199, 44);
     
-    [self.view addSubview:self.scratchoff];
+    // Add scratchoff
+    self.scratchOff = [[DIYJazzHands alloc] initWithFrame:self.scratchedOff.frame withTarget:self withAction:@selector(didScratchOff)];
+//    self.scratchOff.bgColor = [UIColor grayColor];
+//    self.scratchOff.touchColor = [UIColor clearColor];
+    self.scratchOff.touchSize = 10;
+    [self.scratchOff initContext];
+    
+    [self.view addSubview:self.scratchedOff];
+    [self.view addSubview:self.scratchOff];
 }
 
 - (void)viewDidUnload
@@ -64,7 +71,8 @@
 
 - (void)releaseObjects
 {
-    [self.scratchoff release]; _scratchoff = nil;
+    [self.scratchOff release]; _scratchOff = nil;
+    [self.scratchedOff release]; _scratchedOff = nil;
 }
 
 - (void)dealloc

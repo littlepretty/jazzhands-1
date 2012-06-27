@@ -51,9 +51,6 @@ typedef struct {
 //    CGPoint lastPoint;
 }
 
-@property (nonatomic, retain) id target;
-@property (nonatomic, assign) SEL action;
-
 //
 // Public Properties
 //
@@ -65,10 +62,14 @@ typedef struct {
 
 // Interactive
 @property (nonatomic, assign) int touchSize;
+@property (nonatomic, assign) int targetSize;
 
 //
 // Private Properties
 //
+
+@property (nonatomic, retain) id target;
+@property (nonatomic, assign) SEL action;
 
 //
 // Init

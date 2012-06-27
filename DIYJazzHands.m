@@ -18,7 +18,7 @@
 @synthesize mask = _mask;
 
 @synthesize touchSize= _touchSize;
-
+@synthesize targetSize = _targetSize;
 
 
 #pragma mark - Init
@@ -57,7 +57,7 @@
     
     
     // Create scratchable CGImageRef
-    scratchable = [UIImage imageNamed:@"gra_scratchable.png"].CGImage;
+    scratchable = [UIImage imageNamed:@"gra_scratch_off_field@2x.png"].CGImage;
 //    CGContextSetFillColorWithColor(alphaPixels, self.bgColor.CGColor);  
     
     // Set up CGContext for real
@@ -89,18 +89,15 @@
     CGPoint lastPoint = [touch previousLocationInView:self];
     CGPoint newPoint = [touch locationInView:self];
     
-    /*
-    // check whether touch is on a target
-    bool touchedTarget = false;
+    // Check whether touch is on a target
     
     for (int i = 0; i < lineCount; i++) {
-        for (int j = 0; j < lines[i].touchCount; j++) {
+        for (int j = 0; j < lines[i].targetCount; j++) {
             
         }
     }
-    */
-    // 
 
+    // Draw new touches
     [self drawToCacheFromPoint:lastPoint toPoint:newPoint];
     [self setNeedsDisplay];
 }

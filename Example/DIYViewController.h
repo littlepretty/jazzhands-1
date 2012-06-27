@@ -11,6 +11,7 @@
 
 @interface DIYViewController : UIViewController
 
-@property (nonatomic, retain) DIYJazzHands *scratchoff;
+@property (nonatomic, retain) DIYJazzHands *scratchOff;
+@property (nonatomic, retain) UIImageView *scratchedOff;
 
 @end
