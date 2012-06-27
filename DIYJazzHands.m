@@ -78,8 +78,13 @@
 }
 
 #pragma mark - Meat - interaction and drawing
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+}
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesMoved:touches withEvent:event];
     UITouch *touch = [touches anyObject];
     CGPoint lastPoint = [touch previousLocationInView:self];
     CGPoint newPoint = [touch locationInView:self];
@@ -98,6 +103,16 @@
 
     [self drawToCacheFromPoint:lastPoint toPoint:newPoint];
     [self setNeedsDisplay];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesCancelled:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
 }
 
 #pragma mark - Fix dirtyrect stuff
