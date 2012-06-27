@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE1AAB84159AF728007E7C58 /* scratchable.png in Resources */ = {isa = PBXBuildFile; fileRef = DE1AAB83159AF728007E7C58 /* scratchable.png */; };
 		DEAC882B159A6A78007D8824 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAC882A159A6A78007D8824 /* UIKit.framework */; };
 		DEAC882D159A6A78007D8824 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAC882C159A6A78007D8824 /* Foundation.framework */; };
 		DEAC882F159A6A78007D8824 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEAC882E159A6A78007D8824 /* CoreGraphics.framework */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE1AAB83159AF728007E7C58 /* scratchable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratchable.png; sourceTree = "<group>"; };
 		DEAC8826159A6A78007D8824 /* DIYJazzHands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DIYJazzHands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEAC882A159A6A78007D8824 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DEAC882C159A6A78007D8824 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -98,6 +100,7 @@
 		DEAC8831159A6A78007D8824 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DE1AAB83159AF728007E7C58 /* scratchable.png */,
 				DEAC8852159A6FE5007D8824 /* scratchOff.png */,
 				DEAC8832159A6A78007D8824 /* DIYJazzHands-Info.plist */,
 				DEAC8833159A6A78007D8824 /* InfoPlist.strings */,
@@ -162,6 +165,7 @@
 				DEAC8835159A6A78007D8824 /* InfoPlist.strings in Resources */,
 				DEAC8851159A6D76007D8824 /* DIYViewController.xib in Resources */,
 				DEAC8853159A6FE5007D8824 /* scratchOff.png in Resources */,
+				DE1AAB84159AF728007E7C58 /* scratchable.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

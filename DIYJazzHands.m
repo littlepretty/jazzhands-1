@@ -46,24 +46,34 @@
 
 - (BOOL)initContext
 {
-    int bytesPerPixel = 4;
-    int bytesPerRow = self.frame.size.width * bytesPerPixel;
-    int byteCount = bytesPerRow * self.frame.size.height;
+    int width = self.frame.size.width;
+    int height = self.frame.size.height;
+    self.opaque = NO;
+    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceGray();
     
-    cacheBitmap = malloc(byteCount);
-    if (cacheBitmap == NULL) {
-        return NO;
-    }
+    CFMutableDataRef pixels = CFDataCreateMutable( NULL , width * height );
+    alphaPixels = CGBitmapContextCreate( CFDataGetMutableBytePtr( pixels ) , width , height , 8 , width , colorspace , kCGImageAlphaNone );
+    provider = CGDataProviderCreateWithCFData(pixels);
     
-    cacheContext = CGBitmapContextCreate(cacheBitmap, self.frame.size.width, self.frame.size.height, 8, bytesPerRow, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaLast);
     
-    // check
-    CGContextSetFillColorWithColor(cacheContext, [self.bgColor CGColor]);
-    CGContextFillRect(cacheContext, CGRectMake(0, 0, self.frame.size.width, self.frame.size.height));
+    // Create scratchable CGImageRef
+    scratchable = [UIImage imageNamed:@"scratchable.png"].CGImage;
+//    CGContextSetFillColorWithColor(alphaPixels, self.bgColor.CGColor);  
     
-    // init UIImage
-    //self.mask = [UIImage imageNamed:@"sample_mask.png"];
+    // Set up CGContext for real
+    CGContextSetFillColorWithColor(alphaPixels, [UIColor blackColor].CGColor);
+    CGContextFillRect(alphaPixels, self.frame);
     
+    CGContextSetStrokeColorWithColor(alphaPixels, [UIColor whiteColor].CGColor);
+    CGContextSetLineWidth(alphaPixels, 5.0);
+    CGContextSetLineCap(alphaPixels, kCGLineCapRound);
+    
+      
+    CGImageRef mask = CGImageMaskCreate(width, height, 8, 8, width, provider, nil, NO);
+    scratched = CGImageCreateWithMask(scratchable, mask);
+    
+    CGImageRelease(mask);
+    CGColorSpaceRelease(colorspace);
     return YES;
 }
 
@@ -92,31 +102,18 @@
 
 #pragma mark - Fix dirtyrect stuff
 - (void) drawToCacheFromPoint:(CGPoint)lastPoint toPoint:(CGPoint)newPoint {
-    CGContextSetStrokeColorWithColor(cacheContext, [self.touchColor CGColor]);
-    CGContextSetLineCap(cacheContext, kCGLineCapRound);
-    CGContextSetLineWidth(cacheContext, self.touchSize);
-    
-//    CGPoint lastPoint = [touch previousLocationInView:self];
-//    CGPoint newPoint = [touch locationInView:self];
-    
-    CGContextMoveToPoint(cacheContext, lastPoint.x, lastPoint.y);
-    CGContextAddLineToPoint(cacheContext, newPoint.x, newPoint.y);
-    CGContextStrokePath(cacheContext);
-    
-    CGRect dirtyPoint1 = CGRectMake(lastPoint.x-10, lastPoint.y-10, 20, 20);
-    CGRect dirtyPoint2 = CGRectMake(newPoint.x-10, newPoint.y-10, 20, 20);
-    [self setNeedsDisplayInRect:CGRectUnion(dirtyPoint1, dirtyPoint2)];
+	CGContextMoveToPoint(alphaPixels, lastPoint.x, lastPoint.y);
+	CGContextAddLineToPoint(alphaPixels, newPoint.x, newPoint.y);
+	CGContextStrokePath(alphaPixels);
+	[self setNeedsDisplay];
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGImageRef cacheImage = CGBitmapContextCreateImage(cacheContext);
-    CGContextDrawImage(context, self.bounds, cacheImage);
-    CGImageRelease(cacheImage);
+    CGContextDrawImage(UIGraphicsGetCurrentContext() , [self bounds] , scratched);
     
     // also draw overlay
-    [self.mask drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+//    [self.mask drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 }
 
 #pragma mark - Setup
@@ -124,7 +121,7 @@
 - (void)addLineAtPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
 {
     if (lineCount < MAXLINES) {
-        JiveLine newLine;
+        JazzLine newLine;
         newLine.p1 = startPoint;
         newLine.p2 = endPoint;
         lines[lineCount] = newLine;
@@ -148,7 +145,7 @@
 - (void)reset
 {
     // clear context
-    CGContextFlush(cacheContext);
+    CGContextFlush(alphaPixels);
     
     // reset targets
     targetCount = 0;
@@ -173,8 +170,8 @@
 
 - (void)dealloc
 {
-    CGContextFlush(cacheContext);
-    CGContextRelease(cacheContext);
+    CGContextFlush(alphaPixels);
+    CGContextRelease(alphaPixels);
     [super dealloc];
 }
 

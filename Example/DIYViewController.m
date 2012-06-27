@@ -37,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.scratchoff = [[DIYJazzHands alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTarget:self withAction:@selector(didScratchOff)];
+    self.scratchoff = [[DIYJazzHands alloc] initWithFrame:CGRectMake(196, 244, 200, 44) withTarget:self withAction:@selector(didScratchOff)];
     self.scratchoff.bgColor = [UIColor grayColor];
     self.scratchoff.touchColor = [UIColor clearColor];
     self.scratchoff.touchSize = 10;

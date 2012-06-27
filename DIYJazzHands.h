@@ -30,15 +30,21 @@ typedef struct {
     CGPoint p2;
     FingerTarget targets[MAXTARGETS];
     int targetCount;
-} JiveLine;
+} JazzLine;
 
 //
 
 @interface DIYJazzHands : UIView
 {
-    void *cacheBitmap;
-    CGContextRef cacheContext;
-    JiveLine lines[MAXLINES];
+	CGImageRef scratchable;
+	CGImageRef scratched;
+	CGContextRef alphaPixels;
+	CGDataProviderRef provider;
+    
+    CGPoint	location;
+	CGPoint	previousLocation;
+    
+    JazzLine lines[MAXLINES];
     int lineCount;
     int targetCount;
     
