@@ -57,7 +57,7 @@
     
     
     // Create scratchable CGImageRef
-    scratchable = [UIImage imageNamed:@"scratchable.png"].CGImage;
+    scratchable = [UIImage imageNamed:@"gra_scratchable.png"].CGImage;
 //    CGContextSetFillColorWithColor(alphaPixels, self.bgColor.CGColor);  
     
     // Set up CGContext for real
