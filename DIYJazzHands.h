@@ -88,6 +88,8 @@ typedef struct {
 @property (nonatomic, assign) SEL action;
 @property (nonatomic, retain) NSMutableArray *lines;
 
+@property (nonatomic, retain) NSTimer *checkTimer;
+
 //
 // Init
 //

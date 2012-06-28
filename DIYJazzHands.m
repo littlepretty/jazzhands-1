@@ -83,6 +83,8 @@
 
 @synthesize lines = _lines;
 
+@synthesize checkTimer = _checkTimer;
+
 
 #pragma mark - Init
 
@@ -106,6 +108,8 @@
         isTriggered = NO;
         _targetSize = TARGETRADIUS;
         _lines = [[NSMutableArray alloc] init];
+        
+       _checkTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(checkFinished) userInfo:nil repeats:YES];
     }
     return self;
 }
@@ -265,6 +269,8 @@
     [_bgColor release]; self.bgColor = nil;
     [_touchColor release]; self.touchColor = nil;
     [_mask release]; self.mask = nil;
+    
+    [_checkTimer invalidate]; [_checkTimer release]; self.checkTimer = nil;
     
     [super dealloc];
 }
