@@ -52,7 +52,7 @@
     int dY = yDist / (float)numTargets;
     
     for (int i = 0; i < numTargets; i++) {
-        JazzTarget *newTarget = [[JazzTarget alloc] init];
+        JazzTarget *newTarget = [[[JazzTarget alloc] init] autorelease];
         newTarget.targetRect = CGRectMake(startPoint.x + i*dX, startPoint.y + i*dY, targetSize, targetSize);
         newTarget.triggered = NO;
         [self.targets addObject:newTarget];
@@ -127,7 +127,8 @@
     
     
     // Create scratchable CGImageRef
-    scratchable = [UIImage imageNamed:@"gra_scratch_off_field@2x.png"].CGImage;
+    NSString *bundlePath    = [[NSBundle mainBundle] bundlePath];
+    scratchable = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/gra_scratch_off_field_flip@2x.png", bundlePath]].CGImage;
 //    CGContextSetFillColorWithColor(alphaPixels, self.bgColor.CGColor);  
     
     // Set up CGContext for real
@@ -199,7 +200,7 @@
 
 - (void)addLineAtPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
 {
-    JazzLine *newLine = [[JazzLine alloc] init];
+    JazzLine *newLine = [[[JazzLine alloc] init] autorelease];
     [newLine addLineFromPoint:startPoint toPoint:endPoint withTargetSize:self.targetSize];
     [self.lines addObject:newLine];
     
