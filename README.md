@@ -1,30 +1,32 @@
-# DIYJazzHands
+## DIYJazzHands
+#### Scratch-off images like woah.
 
-DIYJazzHands is a fancy gesture-based UIAlertView.
-
-## Getting Started
+### Basic Use
 
 ```objective-c
-// Init
-```
+// Init with frame, touch target and completion selector
+DIYJazzHands *scratchOff = [[DIYJazzHands alloc] initWithFrame:CGRectMake(0, 0, 100, 100) withTarget:self withAction:@selector(didScratchOff)];
 
-## Required Frameworks
-    AssetsLibrary.framework
-    AVFoundation.framework
-    CoreGraphics.framework
-    CoreMedia.framework
-    MobileCoreServices.framework
-    QuartzCore.framework
+// Set image
+[scratchOff initContextWithImage:[UIImage imageNamed:@"gra_scratch_off_field@2x.png"]];
+
+// Create zone for "scratching"
+[scratchOff addLineAtPoint:CGPointMake(0, 0.5 * scratchOff.frame.size.height) toPoint:CGPointMake(scratchOff.frame.size.width, 0.5 * scratchOff.frame.size.height)];
     
-## Configuration
-TBD
-
-## Methods
-```objective-c
-
+// Add to view
+[self.view addSubview:scratchOff];
 ```
 
-## Properties
 ```objective-c
+- (void)didScratchOff
+{
+    NSLog(@"Scratch complete!");
+}
+```
 
+### Methods
+```objective-c
+- (id)initWithFrame:(CGRect)frame withTarget:(id)aTarget withAction:(SEL)anAction;
+- (void)addLineAtPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
+- (void)initContextWithImage:(UIImage *)image;
 ```
