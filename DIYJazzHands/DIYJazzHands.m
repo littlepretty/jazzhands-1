@@ -9,14 +9,14 @@
 #import "DIYJazzHands.h"
 
 #pragma mark - JazzTarget
-@implementation JazzTarget
 
+@implementation JazzTarget
 @synthesize targetRect = _targetRect;
 @synthesize triggered = _triggered;
-
 @end
 
 #pragma mark - JazzLine
+
 @implementation JazzLine
 
 @synthesize p1 = _p1;
@@ -26,9 +26,10 @@
 - (id)init
 {
     if (self = [super init]) {
-        _targets = [[NSMutableArray alloc] init];
+        _p1         = CGPointMake(0, 0);
+        _p2         = CGPointMake(0, 0);
+        _targets    = [[NSMutableArray alloc] init];
     }
-    
     return self;
 }
 
@@ -36,11 +37,7 @@
 {
     self.p1 = startPoint;
     self.p2 = endPoint;
-    
-    //
-    // Make targets along line
-    //
-    
+        
     // Precalculate distances
     int xDist = endPoint.x - startPoint.x;
     int yDist = endPoint.y - startPoint.y;
@@ -52,7 +49,7 @@
     int dY = yDist / (float)numTargets;
     
     for (int i = 0; i < numTargets; i++) {
-        JazzTarget *newTarget = [[[JazzTarget alloc] init] autorelease];
+        JazzTarget *newTarget = [[JazzTarget alloc] init];
         newTarget.targetRect = CGRectMake(startPoint.x + i*dX, startPoint.y + i*dY, targetSize, targetSize);
         newTarget.triggered = NO;
         [self.targets addObject:newTarget];
@@ -61,39 +58,37 @@
 
 - (void)dealloc
 {
-    [_targets release]; self.targets = nil;
-    [super dealloc];
+    _targets = nil;
 }
 
 @end
 
 #pragma mark - DIYJazzHands
 
+@interface DIYJazzHands ()
+@property SEL action;
+@property (strong) id target;
+@property (strong) NSMutableArray *lines;
+@property (strong) NSTimer *checkTimer;
+@end
+
+static CGFloat const targetRadius = 20.0f;
+static CGFloat const interval = 0.1f;
+static CGFloat const lineWidth = 5.0f;
+
 @implementation DIYJazzHands
 
-@synthesize target = _target;
-@synthesize action = _action;
-
-@synthesize bgColor = _bgColor;
-@synthesize touchColor = _touchColor;
-@synthesize mask = _mask;
-
-@synthesize touchSize = _touchSize;
 @synthesize targetSize = _targetSize;
-
+@synthesize action = _action;
+@synthesize target = _target;
 @synthesize lines = _lines;
-
 @synthesize checkTimer = _checkTimer;
-
 
 #pragma mark - Init
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        
-    }
     return self;
 }
 
@@ -101,54 +96,46 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _target = aTarget;
-        _action = anAction;
-        targetCount = 0;
-        targetsTouched = 0;
-        isTriggered = NO;
-        _targetSize = TARGETRADIUS;
-        _lines = [[NSMutableArray alloc] init];
-        
-       _checkTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(checkFinished) userInfo:nil repeats:YES];
+        _targetSize     = targetRadius;
+        _action         = anAction;
+        _target         = aTarget;
+        _lines          = [[NSMutableArray alloc] init];
+        _checkTimer     = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(checkFinished) userInfo:nil repeats:YES];
     }
     return self;
 }
 
-- (BOOL)initContext
+- (void)initContextWithImage:(UIImage *)image
 {
-    int width = self.frame.size.width;
-    int height = self.frame.size.height;
-    self.opaque = NO;
+    int width       = self.frame.size.width;
+    int height      = self.frame.size.height;
+    self.opaque     = NO;
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceGray();
     
     CFMutableDataRef pixels = CFDataCreateMutable( NULL , width * height );
     alphaPixels = CGBitmapContextCreate( CFDataGetMutableBytePtr( pixels ) , width , height , 8 , width , colorspace , kCGImageAlphaNone );
     provider = CGDataProviderCreateWithCFData(pixels);
     
-    
     // Create scratchable CGImageRef
-    NSString *bundlePath    = [[NSBundle mainBundle] bundlePath];
-    scratchable = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/gra_scratch_off_field_flip@2x.png", bundlePath]].CGImage;
-//    CGContextSetFillColorWithColor(alphaPixels, self.bgColor.CGColor);  
+    scratchable = [image CGImage];
     
     // Set up CGContext for real
     CGContextSetFillColorWithColor(alphaPixels, [UIColor blackColor].CGColor);
     CGContextFillRect(alphaPixels, self.frame);
     
     CGContextSetStrokeColorWithColor(alphaPixels, [UIColor whiteColor].CGColor);
-    CGContextSetLineWidth(alphaPixels, 5.0);
+    CGContextSetLineWidth(alphaPixels, lineWidth);
     CGContextSetLineCap(alphaPixels, kCGLineCapRound);
-    
       
     CGImageRef mask = CGImageMaskCreate(width, height, 8, 8, width, provider, nil, NO);
     scratched = CGImageCreateWithMask(scratchable, mask);
     
     CGImageRelease(mask);
     CGColorSpaceRelease(colorspace);
-    return YES;
 }
 
-#pragma mark - Meat - interaction and drawing
+#pragma mark - Interaction and drawing
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
@@ -156,6 +143,7 @@
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
+    
     UITouch *touch = [touches anyObject];
     CGPoint lastPoint = [touch previousLocationInView:self];
     CGPoint newPoint = [touch locationInView:self];
@@ -176,12 +164,12 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-    
     [self checkFinished];
 }
 
 #pragma mark - Drawing
-- (void) drawToCacheFromPoint:(CGPoint)lastPoint toPoint:(CGPoint)newPoint {
+
+- (void)drawToCacheFromPoint:(CGPoint)lastPoint toPoint:(CGPoint)newPoint {
 	CGContextMoveToPoint(alphaPixels, lastPoint.x, lastPoint.y);
 	CGContextAddLineToPoint(alphaPixels, newPoint.x, newPoint.y);
 	CGContextStrokePath(alphaPixels);
@@ -191,42 +179,23 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextDrawImage(UIGraphicsGetCurrentContext() , [self bounds] , scratched);
-    
-    // also draw overlay
-//    [self.mask drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 }
 
 #pragma mark - Setup
 
 - (void)addLineAtPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
 {
-    JazzLine *newLine = [[[JazzLine alloc] init] autorelease];
+    JazzLine *newLine = [[JazzLine alloc] init];
     [newLine addLineFromPoint:startPoint toPoint:endPoint withTargetSize:self.targetSize];
     [self.lines addObject:newLine];
     
     targetCount += [newLine.targets count];
 }
 
-- (void)makeCheckWithFrame:(CGRect)frame
-{
-//    [self addLineAtPoint:CGPointMake(108, 217) toPoint:CGPointMake(213, 319)];
-//    [self addLineAtPoint:CGPointMake(213, 319) toPoint:CGPointMake(402, 86)];
-}
-
-- (void)makeXWithFrame:(CGRect)frame
-{
-    
-}
-
 - (void)reset
 {
-    // clear context
     CGContextFlush(alphaPixels);
-    
-    // reset targets
     targetCount = 0;
-    
-    // clear lines?
 }
 
 #pragma mark - Utility methods
@@ -246,17 +215,18 @@
 }
 
 - (void)checkFinished
-{    
-//    NSLog(@"targetCount: %d", targetCount);
-//    NSLog(@"targetsTouched: %d", targetsTouched);
-    
+{        
     if (targetsTouched > 0.8 * targetCount && !isTriggered) {
         isTriggered = YES;
+        
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self.target performSelector:self.action];
+        #pragma clang diagnostic pop
     }
 }
 
-#pragma mark - Dealloc
+#pragma mark - Memory
 
 - (void)dealloc
 {
@@ -264,16 +234,10 @@
     CGContextFlush(alphaPixels);
     CGContextRelease(alphaPixels);
     
-    // Other
-    
-    [_lines release]; self.lines = nil;
-    [_bgColor release]; self.bgColor = nil;
-    [_touchColor release]; self.touchColor = nil;
-    [_mask release]; self.mask = nil;
-    
-    [_checkTimer invalidate]; [_checkTimer release]; self.checkTimer = nil;
-    
-    [super dealloc];
+    // Nil
+    _lines = nil;
+    [_checkTimer invalidate];
+    _checkTimer = nil;
 }
 
 @end

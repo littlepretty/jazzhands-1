@@ -36,8 +36,8 @@
 		DEAC8838159A6A78007D8824 /* DIYJazzHands-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DIYJazzHands-Prefix.pch"; sourceTree = "<group>"; };
 		DEAC8839159A6A78007D8824 /* DIYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DIYAppDelegate.h; sourceTree = "<group>"; };
 		DEAC883A159A6A78007D8824 /* DIYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DIYAppDelegate.m; sourceTree = "<group>"; };
-		DEAC884A159A6B22007D8824 /* DIYJazzHands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIYJazzHands.h; path = ../DIYJazzHands.h; sourceTree = "<group>"; };
-		DEAC884B159A6B22007D8824 /* DIYJazzHands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIYJazzHands.m; path = ../DIYJazzHands.m; sourceTree = "<group>"; };
+		DEAC884A159A6B22007D8824 /* DIYJazzHands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIYJazzHands.h; path = ../DIYJazzHands/DIYJazzHands.h; sourceTree = "<group>"; };
+		DEAC884B159A6B22007D8824 /* DIYJazzHands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIYJazzHands.m; path = ../DIYJazzHands/DIYJazzHands.m; sourceTree = "<group>"; };
 		DEAC884D159A6D76007D8824 /* DIYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIYViewController.h; sourceTree = SOURCE_ROOT; };
 		DEAC884E159A6D76007D8824 /* DIYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIYViewController.m; sourceTree = SOURCE_ROOT; };
 		DEAC884F159A6D76007D8824 /* DIYViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DIYViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -58,11 +58,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DEAC881B159A6A77007D8824 = {
+		C3D77CC41718B76A00A79468 /* DIYJazzHands */ = {
 			isa = PBXGroup;
 			children = (
 				DEAC884A159A6B22007D8824 /* DIYJazzHands.h */,
 				DEAC884B159A6B22007D8824 /* DIYJazzHands.m */,
+			);
+			name = DIYJazzHands;
+			sourceTree = "<group>";
+		};
+		DEAC881B159A6A77007D8824 = {
+			isa = PBXGroup;
+			children = (
+				C3D77CC41718B76A00A79468 /* DIYJazzHands */,
 				DEAC8830159A6A78007D8824 /* Example */,
 				DEAC8829159A6A78007D8824 /* Frameworks */,
 				DEAC8827159A6A78007D8824 /* Products */,
@@ -210,6 +218,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -234,6 +244,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -251,6 +263,8 @@
 		DEAC883F159A6A78007D8824 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DIYJazzHands/DIYJazzHands-Prefix.pch";
 				INFOPLIST_FILE = "DIYJazzHands/DIYJazzHands-Info.plist";
@@ -262,6 +276,8 @@
 		DEAC8840159A6A78007D8824 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DIYJazzHands/DIYJazzHands-Prefix.pch";
 				INFOPLIST_FILE = "DIYJazzHands/DIYJazzHands-Info.plist";
