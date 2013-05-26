@@ -115,6 +115,7 @@ static CGFloat const lineWidth = 5.0f;
     CFMutableDataRef pixels = CFDataCreateMutable( NULL , width * height );
     alphaPixels = CGBitmapContextCreate( CFDataGetMutableBytePtr( pixels ) , width , height , 8 , width , colorspace , kCGImageAlphaNone );
     provider = CGDataProviderCreateWithCFData(pixels);
+    CFRelease(pixels);
     
     // Create scratchable CGImageRef
     scratchable = [image CGImage];
