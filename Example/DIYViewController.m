@@ -50,6 +50,11 @@
     // Add target lines to scratchOff
     [self.scratchOff addLineAtPoint:CGPointMake(0, 0.5 * self.scratchOff.frame.size.height) toPoint:CGPointMake(self.scratchOff.frame.size.width, 0.5 * self.scratchOff.frame.size.height)];
     
+    UILabel *prompt = [[UILabel alloc] initWithFrame:self.scratchOff.bounds];
+    prompt.text = @"Scratch me off!";
+    prompt.backgroundColor = [UIColor clearColor];
+    [self.scratchOff addPromptView:prompt];
+    
     [self.view addSubview:self.scratchedOff];
     [self.view addSubview:self.scratchOff];
 }
