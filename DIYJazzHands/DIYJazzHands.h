@@ -44,4 +44,6 @@
 - (void)addLineAtPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
 - (void)initContextWithImage:(UIImage *)image;
 
+- (void)addPromptView:(UIView *)promptView;
+
 @end

@@ -66,6 +66,11 @@
 #pragma mark - DIYJazzHands
 
 @interface DIYJazzHands ()
+{
+    UIView *_promptView;
+    BOOL _touched;
+}
+
 @property SEL action;
 @property (strong) id target;
 @property (strong) NSMutableArray *lines;
@@ -133,6 +138,17 @@ static CGFloat const lineWidth = 5.0f;
     
     CGImageRelease(mask);
     CGColorSpaceRelease(colorspace);
+    
+    _promptView = nil;
+    _touched = NO;
+}
+
+- (void)addPromptView:(UIView *)promptView
+{
+    if (!promptView || _touched) return;
+    _promptView = promptView;
+    promptView.userInteractionEnabled = NO;
+    [self addSubview:promptView];
 }
 
 #pragma mark - Interaction and drawing
@@ -140,6 +156,13 @@ static CGFloat const lineWidth = 5.0f;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
+    
+    if (!_touched) {
+        _touched = YES;
+        [UIView animateWithDuration:0.2f animations:^{
+            _promptView.alpha = 0.0f;
+        }];
+    }
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
